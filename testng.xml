@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="F:/automation_task">
+        <classes>
+            <class name="com.orangehrm.testcases.EditEmployeeInfoTest">
+                <methods>
+                    <include name="loginWithAdmin"/>
+                    <include name="addNewEmployee"/>
+                    <include name="editEmployeePersonalDetails"/>
+                    <include name="canSearchAndEditTheAddedEmployee"/>
+                    <include name="userCanAddContactDetails"/>
+                    <include name="userCanAddJobDetails"/>
+                </methods></class>
+        </classes>
+    </test>
+</suite>

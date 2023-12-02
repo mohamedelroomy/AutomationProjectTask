@@ -1,0 +1,11 @@
+{
+  "city": "Alexandria",
+  "state" : "Agami",
+  "zip": "123",
+  "country": "Egypt",
+  "homeNumber": "034348560",
+  "mobileNumber": "01010133517",
+  "workNumber": "01010133588",
+  "workEmail": "work@gmail.com",
+  "otherEmail": "hello@gmail.com"
+}
