@@ -12,7 +12,8 @@ public class PersonalDetailsPage extends BasePage {
     @FindBy(linkText = "Contact Details")
     WebElement contactDetailsBtn;
 
-    public void openContactDetails(){
+    public ContactDetailPage openContactDetails(){
         click(contactDetailsBtn);
+        return new ContactDetailPage(driver);
     }
 }

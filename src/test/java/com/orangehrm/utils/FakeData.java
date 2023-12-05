@@ -12,7 +12,7 @@ public class FakeData {
     private final String lastName = new Faker().name().lastName();;
     private final String employeeId = new Faker().number().digits(4);;
     private Employee employee;
-    private Employee personalDetailEmployee;
+    //private Employee personalDetailEmployee;
     private String otherId;
     private String drivingLicenseNo;
     private String drivingLicenseExpiryDate;
@@ -31,8 +31,15 @@ public class FakeData {
         this.drivingLicenseExpiryDate = getDrivingLicenseExpiryDate();
         this.gender=getGender();
         this.birthday = getBirthday();
-        this.personalDetailEmployee = new Employee(employee.getFirstName(),employee.getMiddleName(),employee.getLastName(),employee.getEmployeeId(),otherId,drivingLicenseNo,drivingLicenseExpiryDate,gender,"Single",birthday,55,"01452144");
-        return personalDetailEmployee;
+        this.employee.setOtherId(this.otherId);
+        this.employee.setDrivingLicenseNo(this.drivingLicenseNo);
+        this.employee.setDrivingLicenseExpiredDate(this.drivingLicenseExpiryDate);
+        this.employee.setGender(this.gender);
+        this.employee.setBirthday(this.birthday);
+        this.employee.setMaritalStatus("Single");
+        this.employee.setNationalityId(55);
+        this.employee.setSinNumber("01452144");
+        return employee;
     }
 
     public String getOtherId(){

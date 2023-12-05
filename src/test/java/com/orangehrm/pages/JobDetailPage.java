@@ -52,7 +52,7 @@ public class JobDetailPage extends BasePage {
     @FindBy (xpath = "//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div/div[2]/div[1]/form/div[5]/button")
     WebElement saveAttachmentBtn;
 
-    public void fillJobDetails (String joinedDate, String JobTitle, String subUnit, String location, String empStatus){
+    public JobDetailPage fillJobDetails (String joinedDate, String JobTitle, String subUnit, String location, String empStatus){
         new WebDriverWait(driver,Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(jobTitleDDL));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         insertIntoElement(joinedDatePicker,convertDateToYearFirst(joinedDate));
@@ -60,6 +60,7 @@ public class JobDetailPage extends BasePage {
         selectFromDropDownWithValue(subUnitDDL,listBox,subUnit);
         selectFromDropDownWithValue(locationDDL,listBox,location);
         selectFromDropDownWithValue(employmentStatusDDL,listBox,empStatus);
+        return this;
     }
     private String convertDateToYearFirst(String insertedDate){
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -69,13 +70,14 @@ public class JobDetailPage extends BasePage {
         return fixedDate.format(outputFormatter);
     }
 
-    public void addContractDetails(){
+    public JobDetailPage addContractDetails(){
         click(includeEmploymentToggle);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         insertIntoElement(contractStartDatePicker,getTodayDate());
         insertIntoElement(contractEndDatePicker,getOneYearFromNow());
         scrollDownUntilElementVisible(saveAttachmentBtn);
         click(saveAttachmentBtn);
+        return this;
     }
 
     private String getTodayDate(){

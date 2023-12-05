@@ -80,37 +80,42 @@ public class ContactDetailPage extends BasePage {
     @FindBy (linkText = "Job")
     WebElement jobDetailsBtn;
 
-    public void insertAddress(String street1, String street2, String city, String state, String zip){
+    public ContactDetailPage insertAddress(String street1, String street2, String city, String state, String zip){
         insertIntoElement(street1TxtField,street1);
         insertIntoElement(street2TxtField,street2);
         insertIntoElement(cityTxtField,city);
         insertIntoElement(stateTxtField,state);
         insertIntoElement(zipTxtField,zip);
+        return this;
     }
 
-    public void selectCountry(String country) {
+    public ContactDetailPage selectCountry(String country) {
 //        click(countryDDL);
 //        Thread.sleep(2000);
 //        click(listOptions.get(3));
         selectFromDropDownWithValue(countryDDL,listBox,country);
+        return this;
         }
-    public void insertTelephone(String homeNumber, String mobileNumber, String workNumber){
+    public ContactDetailPage insertTelephone(String homeNumber, String mobileNumber, String workNumber){
         insertIntoElement(homeNumberTxtField,homeNumber);
         insertIntoElement(mobileNumberTxtField,mobileNumber);
         insertIntoElement(workNumberTxtField,workNumber);
+        return this;
     }
 
-    public void insertEmails(String workEmail, String otherEmail){
+    public ContactDetailPage insertEmails(String workEmail, String otherEmail){
         insertIntoElement(workEmailTxtField,workEmail);
         insertIntoElement(otherEmailTxtField,otherEmail);
+        return this;
     }
 
-    public void uploadAttachment() {
+    public ContactDetailPage uploadAttachment() {
         scrollDownUntilElementVisible(addBtn);
         click(addBtn);
         File uploadFile = new File("src/test/resources/photo.jpg");
         insertIntoElement(uploadFileElement,uploadFile.getAbsolutePath());
         click(saveAttachmentBtn);
+        return this;
     }
     public boolean newRecordIsAdded() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -123,10 +128,11 @@ public class ContactDetailPage extends BasePage {
         return successToaster.getText();
     }
 
-    public void openJobDetails(){
+    public JobDetailPage openJobDetails(){
         scrollToTheTopOfPage();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         click(jobDetailsBtn);
+        return new JobDetailPage(driver);
     }
 
 }

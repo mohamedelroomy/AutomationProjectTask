@@ -31,19 +31,21 @@ public class EmployeeListPage extends BasePage {
     List<WebElement> listOfEmployees;
 
 
-    public void searchForEmployeeById(String id){
+    public EmployeeListPage searchForEmployeeById(String id){
         insertIntoElement(employeeIdTXTField, id);
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(searchBtn));
         click(searchBtn);
+        return this;
     }
 
-    public void searchForEmployeeByName(String name){
+    public EmployeeListPage searchForEmployeeByName(String name){
         insertIntoElement(employeeNameTXTField, name);
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(searchBtn));
         click(searchBtn);
+        return this;
     }
 
-    public void editFirstEmployee() {
+    public PersonalDetailsPage editFirstEmployee() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         try {
             new WebDriverWait(driver, Duration.ofSeconds(6)).until(ExpectedConditions.visibilityOf(listOfEmployees.get(0)));
@@ -59,6 +61,7 @@ public class EmployeeListPage extends BasePage {
             scrollDownUntilElementVisible(listOfEmployees.get(0));
             click(listOfEmployees.get(0));
         }
+        return new PersonalDetailsPage(driver);
     }
 
 

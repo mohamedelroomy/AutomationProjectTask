@@ -13,7 +13,8 @@ public class DashboardPage extends BasePage {
     @FindBy (xpath = "//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a")
     WebElement PIM;
 
-    public void navigateToPIM(){
+    public EmployeeListPage navigateToPIM(){
         click(PIM);
+        return new EmployeeListPage(driver);
     }
 }

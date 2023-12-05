@@ -43,7 +43,7 @@ public class EditEmployeeInfoTest extends BaseTest {
     @Test(priority = 1,description = "login as admin with valid username and password",groups = {"web automation"})
     public void loginWithAdmin(){
         loginPage = new LoginPage(driver);
-        loginPage
+        employeeListPage = loginPage
                 .login(Constant.loginUsername, Constant.loginPassword)
                 .navigateToPIM();
         loginCookie= getCookie();
@@ -51,41 +51,40 @@ public class EditEmployeeInfoTest extends BaseTest {
 
     @Test(priority = 4 ,description = "user can search with the add employee by employee Id", groups = {"web automation"})
     public void canSearchAndEditTheAddedEmployee(){
-        employeeListPage = new EmployeeListPage(driver);
-        employeeListPage.searchForEmployeeById(employeeId);
-        employeeListPage.editFirstEmployee();
+        personalDetailsPage = employeeListPage
+                .searchForEmployeeById(employeeId)
+                .editFirstEmployee();
     }
 
     @Test(priority = 5 ,description = "user filling contact details", groups = {"web automation"})
     public void userCanAddContactDetails() {
-        personalDetailsPage = new PersonalDetailsPage(driver);
-        personalDetailsPage.openContactDetails();
-        contactDetailPage = new ContactDetailPage(driver);
-        contactDetailPage.insertAddress(fakeData.generateRandomStreet()
+        contactDetailPage = personalDetailsPage
+                .openContactDetails()
+                .insertAddress(fakeData.generateRandomStreet()
                 ,fakeData.generateRandomStreet()
                 ,JsonReader.getValueOfKey("city")
                 ,JsonReader.getValueOfKey("state")
-                ,JsonReader.getValueOfKey("zip"));
-        contactDetailPage.selectCountry(JsonReader.getValueOfKey("country"));
-        contactDetailPage.insertTelephone(JsonReader.getValueOfKey("homeNumber")
-                ,JsonReader.getValueOfKey("mobileNumber")
-                ,JsonReader.getValueOfKey("workNumber"));
-        contactDetailPage.insertEmails(JsonReader.getValueOfKey("workEmail"),JsonReader.getValueOfKey("otherEmail"));
-        contactDetailPage.uploadAttachment();
+                ,JsonReader.getValueOfKey("zip"))
+                .selectCountry(JsonReader.getValueOfKey("country"))
+                .insertTelephone(JsonReader.getValueOfKey("homeNumber")
+                    ,JsonReader.getValueOfKey("mobileNumber")
+                    ,JsonReader.getValueOfKey("workNumber"))
+                .insertEmails(JsonReader.getValueOfKey("workEmail"),JsonReader.getValueOfKey("otherEmail"))
+                .uploadAttachment();
         Assert.assertTrue(contactDetailPage.getSuccessToasterMessage().contains("Successfully Saved"));
         Assert.assertTrue(contactDetailPage.newRecordIsAdded());
-        contactDetailPage.openJobDetails();
     }
 
     @Test(priority = 6 ,description = "user filling job details", groups = {"web automation"})
     public void userCanAddJobDetails(){
-        jobDetailPage = new JobDetailPage(driver);
-        jobDetailPage.fillJobDetails("15-06-2015"
-                , "Software Engineer"
-                , "Quality Assurance"
-                ,"Texas R&D"
-                , "Part-Time Internship");
-        jobDetailPage.addContractDetails();
+        jobDetailPage = contactDetailPage
+                .openJobDetails()
+                .fillJobDetails("15-06-2015"
+                    ,"Software Engineer"
+                    ,"Quality Assurance"
+                    ,"Texas R&D"
+                    ,"Part-Time Internship")
+                .addContractDetails();
         Assert.assertTrue(jobDetailPage.getSuccessToasterMessage().contains("Successfully Updated"));
     }
 
