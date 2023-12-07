@@ -28,7 +28,6 @@ public class EditEmployeeInfoTest extends BaseTest {
         fakeData = new FakeData();
         Response response = new AddEmployeeApi().addEmployee(fakeData.getEmployee(),loginCookie);
         Assert.assertEquals(response.statusCode(),200);
-        employeeId = response.path("data.employeeId");
         employeeNumber = response.path("data.empNumber");
     }
 
@@ -37,7 +36,6 @@ public class EditEmployeeInfoTest extends BaseTest {
         Response response= new PersonalDetailsApi().editPersonalDetails(fakeData.getPersonalDetailEmployee(),employeeNumber,loginCookie);
         Assert.assertEquals(response.statusCode(),200);
         employeeId = response.path("data.employeeId");
-        employeeNumber = response.path("data.empNumber");
     }
 
     @Test(priority = 1,description = "login as admin with valid username and password",groups = {"web automation"})

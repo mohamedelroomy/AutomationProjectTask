@@ -39,17 +39,15 @@ public class BasePage {
     }
 
     public void selectFromDropDownWithValue(WebElement dropDown, WebElement listBox ,String value) {
-//        click(countryDDL);
-//        Thread.sleep(2000);
-//        click(listOptions.get(3));
         click(dropDown);
-        String countryPath = "//div[@role='option']//span[contains(text(), '"+value+"')]";
+        String spanPath = "//div[@role='option']//span[contains(text(), '"+value+"')]";
         try {
-            WebElement  countryDiv = listBox.findElement(By.xpath(countryPath));
-            click(countryDiv);
+            WebElement  Span = listBox.findElement(By.xpath(spanPath));
+            click(Span);
         } catch (org.openqa.selenium.NoSuchElementException e) {
             e.getMessage();
 
         }
     }
+
 }
